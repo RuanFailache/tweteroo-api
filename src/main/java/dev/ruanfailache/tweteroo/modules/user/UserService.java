@@ -1,9 +1,11 @@
 package dev.ruanfailache.tweteroo.modules.user;
 
-import dev.ruanfailache.tweteroo.core.exception.ConflictRequestException;
+import dev.ruanfailache.tweteroo.core.exception.ConflictException;
 import dev.ruanfailache.tweteroo.modules.user.dto.CreateUserDto;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -19,11 +21,13 @@ public class UserService {
 		);
 
 		this.userRepository.findOne(specification).ifPresent(user -> {
-			throw new ConflictRequestException("Username is already registered");
+			throw new ConflictException("Username is already registered");
 		});
 
-		User user = new User(dto);
+		return this.userRepository.save(new User(dto));
+	}
 
-		return this.userRepository.save(user);
+	public Optional<User> findById(Long id) {
+		return this.userRepository.findById(id);
 	}
 }

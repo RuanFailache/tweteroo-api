@@ -2,8 +2,8 @@ package dev.ruanfailache.tweteroo.core.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class ConflictRequestException extends HttpRequestException {
-	public ConflictRequestException(String message) {
+public class ConflictException extends HttpRequestException {
+	public ConflictException(String message) {
 		super(HttpStatus.CONFLICT, message);
 	}
 }

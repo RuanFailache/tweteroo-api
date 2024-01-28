@@ -24,7 +24,7 @@ public class RequestHandlerConfiguration {
 	public ResponseEntity<HttpRequestExceptionDto> handler(MethodArgumentNotValidException exception) {
 		return ResponseEntity.badRequest().body(
 			new HttpRequestExceptionDto(
-				exception.getMessage(),
+				exception.getBindingResult().getAllErrors().get(0).getDefaultMessage(),
 				HttpStatus.BAD_REQUEST
 			)
 		);
