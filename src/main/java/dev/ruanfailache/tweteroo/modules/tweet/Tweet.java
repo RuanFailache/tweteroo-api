@@ -2,20 +2,17 @@ package dev.ruanfailache.tweteroo.modules.tweet;
 
 import dev.ruanfailache.tweteroo.modules.user.User;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
+@Table(name = "tweets")
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@EqualsAndHashCode
 public class Tweet {
 	@Id
 	@GeneratedValue

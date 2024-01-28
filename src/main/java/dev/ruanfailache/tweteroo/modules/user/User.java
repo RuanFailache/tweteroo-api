@@ -1,22 +1,20 @@
 package dev.ruanfailache.tweteroo.modules.user;
 
 import dev.ruanfailache.tweteroo.modules.tweet.Tweet;
+import dev.ruanfailache.tweteroo.modules.user.dto.CreateUserDto;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 import java.util.Set;
 
+@Table(name = "users")
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@EqualsAndHashCode
 public class User {
 	@Id
 	@GeneratedValue
@@ -40,4 +38,9 @@ public class User {
 	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
+
+	public User(CreateUserDto dto) {
+		this.avatar = dto.avatar();
+		this.username = dto.username();
+	}
 }
