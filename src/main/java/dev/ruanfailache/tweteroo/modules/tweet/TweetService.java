@@ -4,7 +4,10 @@ import dev.ruanfailache.tweteroo.core.exception.NotFoundException;
 import dev.ruanfailache.tweteroo.modules.tweet.dto.CreateTweetDto;
 import dev.ruanfailache.tweteroo.modules.user.User;
 import dev.ruanfailache.tweteroo.modules.user.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class TweetService {
@@ -27,5 +30,9 @@ public class TweetService {
 		tweet.setUser(user);
 
 		return this.tweetRepository.save(tweet);
+	}
+
+	public Page<Tweet> findAllWithPagination(Pageable pageable) {
+		return this.tweetRepository.findAll(pageable);
 	}
 }
