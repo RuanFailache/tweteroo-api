@@ -31,4 +31,11 @@ public class TweetController {
 		Page<TweetDto> body = tweets.map(TweetDto::new);
 		return ResponseEntity.status(HttpStatus.OK).body(body);
 	}
+
+	@GetMapping("user/{userId}")
+	public ResponseEntity<Page<TweetDto>> findAllByUser(@PathVariable Long userId, Pageable pageable) {
+		Page<Tweet> tweets = this.tweetService.findAllByUserIdWithPagination(userId, pageable);
+		Page<TweetDto> body = tweets.map(TweetDto::new);
+		return ResponseEntity.status(HttpStatus.OK).body(body);
+	}
 }

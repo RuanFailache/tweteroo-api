@@ -6,6 +6,7 @@ import dev.ruanfailache.tweteroo.modules.user.User;
 import dev.ruanfailache.tweteroo.modules.user.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 
@@ -34,5 +35,10 @@ public class TweetService {
 
 	public Page<Tweet> findAllWithPagination(Pageable pageable) {
 		return this.tweetRepository.findAll(pageable);
+	}
+
+	public Page<Tweet> findAllByUserIdWithPagination(Long userId, Pageable pageable) {
+		Specification<Tweet> specification = Specification.where(TweetSpecification.byUser(userId));
+		return this.tweetRepository.findAll(specification, pageable);
 	}
 }
