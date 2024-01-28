@@ -26,6 +26,7 @@ public class User {
 	@Column(length = 100, nullable = false)
 	private String username;
 
+	@JoinColumn(name = "user_id")
 	@OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
 	private Set<Tweet> tweets;
 

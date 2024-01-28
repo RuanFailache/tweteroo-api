@@ -21,7 +21,7 @@ public class Tweet {
 	@Column(length = 280, nullable = false)
 	private String text;
 
-	@JoinColumn(nullable = false)
+	@JoinColumn(name = "user_id", nullable = false)
 	@ManyToOne(fetch = FetchType.EAGER)
 	private User user;
 
